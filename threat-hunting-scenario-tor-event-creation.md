@@ -40,12 +40,6 @@
 DeviceFileEvents
 | where FileName startswith "tor"
 
-// TOR Browser being silently installed
-// Take note of two spaces before the /S (I don't know why)
-DeviceProcessEvents
-| where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-14.0.1.exe  /S"
-| project Timestamp, DeviceName, ActionType, FileName, ProcessCommandLine
-
 // TOR Browser or service was successfully installed and is present on the disk
 DeviceFileEvents
 | where FileName has_any ("tor.exe", "firefox.exe")
@@ -62,18 +56,14 @@ DeviceNetworkEvents
 | where RemotePort in (9001, 9030, 9040, 9050, 9051, 9150)
 | project Timestamp, DeviceName, InitiatingProcessAccountName, InitiatingProcessFileName, RemoteIP, RemotePort, RemoteUrl
 | order by Timestamp desc
-
-// User shopping list was created and, changed, or deleted
-DeviceFileEvents
-| where FileName contains "shopping-list.txt"
 ```
 
 ---
 
 ## Created By:
-- **Author Name**: Josh Madakor
-- **Author Contact**: https://www.linkedin.com/in/joshmadakor/
-- **Date**: August 31, 2024
+- **Author Name**: William Butler
+- **Author Contact**: https://www.linkedin.com/in/williambutlercybersentinel
+- **Date**: October 28th, 2025
 
 ## Validated By:
 - **Reviewer Name**: 
@@ -87,8 +77,4 @@ DeviceFileEvents
 
 ---
 
-## Revision History:
-| **Version** | **Changes**                   | **Date**         | **Modified By**   |
-|-------------|-------------------------------|------------------|-------------------|
-| 1.0         | Initial draft                  | `September  6, 2024`  | `Josh Madakor`   
 
