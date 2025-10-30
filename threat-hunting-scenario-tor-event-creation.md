@@ -65,16 +65,6 @@ DeviceNetworkEvents
 - **Author Contact**: https://www.linkedin.com/in/williambutlercybersentinel
 - **Date**: October 28th, 2025
 
-## Validated By:
-- **Reviewer Name**: 
-- **Reviewer Contact**: 
-- **Validation Date**: 
-
----
-
-## Additional Notes:
-- **None**
-
 ---
 
 
