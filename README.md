@@ -48,34 +48,58 @@ On October 28, 2025, workstation will-finalprj61 — under user cybervm615 — i
 
 
 ---
-
-## Timeline of Tor Browser Events on Device: will-finalprj61
-## Oct 28, 2025, 11:58:57 AM
-User cybervm615 created and renamed tor-browser-windows-x86_64-portable-14.5.8.exe on workstation will-finalprj61, signifying the initial setup and preparation for Tor browser installation.​​
-
-Oct 28, 2025, 12:07:30 PM
-A process firefox.exe (belonging to the Tor Browser suite) was launched from the directory C:\Users\CyberVM615\Desktop\Tor Browser\Browser\firefox.exe by user cybervm615, which initiated a successful local network connection to 127.0.0.1 over port 9150, consistent with Tor's SOCKS proxy functionality for local anonymized traffic routing.​​
-
-Oct 28, 2025, 12:08:02 PM
-Process tor.exe, located at c:\users\cybervm615\desktop\tor browser\browser\torbrowser\tor\tor.exe, executed by user cybervm615, successfully established an outbound connection to remote IP address 81.7.18.7 on port 9001 (associated with domain https://www.umwb62.com). This port serves Tor relay communications, confirming that Tor client initiated anonymized outbound traffic as is typical for Tor network activity.​​
-
-Oct 28, 2025, 12:16:10 PM (and surrounding times)
-Multiple process creation events for firefox.exe occurred in the same Tor Browser directory (C:\Users\CyberVM615\Desktop\Tor Browser\Browser\firefox.exe) by account cybervm615. Command-line and startup characteristics verified execution as part of the expected Tor Browser (Firefox ESR-based) behavior.​​
-
-Oct 28, 2025, 12:17:49 PM
-Files tor-shopping-list.lnk and tor-shopping-list.txt were created on the desktop, likely referencing Tor browser activities. These artifacts confirm hands-on interaction with Tor-related files on the endpoint by user cybervm615
-
 ---
 
-## Summary
+## # SOC Incident Report: Tor Browser Usage on Endpoint
 
-The user "employee" on the "threat-hunt-lab" device initiated and completed the installation of the TOR browser. They proceeded to launch the browser, establish connections within the TOR network, and created various files related to TOR on their desktop, including a file named `tor-shopping-list.txt`. This sequence of activities indicates that the user actively installed, configured, and used the TOR browser, likely for anonymous browsing purposes, with possible documentation in the form of the "shopping list" file.
+## Incident Overview
+On October 28, 2025, Microsoft Defender for Endpoint (MDE) telemetry confirmed the installation and active use of the Tor Browser by user `cybervm615` on workstation `will-finalprj61`. This activity comprised executable creation, anonymized network connections, and the appearance of artifact files associated with Tor browsing.
 
----
+## Timeline of Events
 
-## Response Taken
+| Timestamp                  | Title                         | Details                                                                                                                                                        |
+|----------------------------|-------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Oct 28, 2025, 11:58:57 AM  | Tor Browser Setup             | User `cybervm615` created and renamed the Tor Browser installer (`tor-browser-windows-x86_64-portable-14.5.8.exe`), marking setup initiation on endpoint.      |
+| Oct 28, 2025, 12:07:30 PM  | Tor Proxy Process Initiated   | `firefox.exe` (Tor Browser ESR) launched, connecting to local SOCKS proxy at 127.0.0.1:9150 for anonymized traffic routing.                                   |
+| Oct 28, 2025, 12:08:02 PM  | Outbound Tor Network Connection| `tor.exe` established outbound connection to IP 81.7.18.7, port 9001 (domain: umwb62.com). This is a Tor relay, confirming anonymized external traffic.        |
+| Oct 28, 2025, 12:16:10 PM+ | Repeated Tor Browser Execution| Multiple launches of `firefox.exe` from Tor Browser folder by `cybervm615`; all process command-lines consistent with Tor Browser activity.                    |
+| Oct 28, 2025, 12:17:49 PM  | Tor-Related Artifact Creation | Desktop shortcut and text files (`tor-shopping-list.lnk`, `tor-shopping-list.txt`) created, confirming user interaction with Tor browsing environment.         |
 
-TOR usage was confirmed on the endpoint `threat-hunt-lab` by the user `employee`. The device was isolated, and the user's direct manager was notified.
+## Key Findings
+
+- Tor Browser installer and supporting executables were present and active on a user endpoint.
+- Network traffic confirmed successful outbound anonymized connections and use of local proxy for browser traffic.
+- Associated artifact files placed on the desktop indicate hands-on interaction with Tor browser features.
+
+## Impact and Risk
+
+- Use of anonymizing tools (Tor) elevates risk for unmonitored data flows, possible exfiltration, and security policy violations.
+- No additional evidence of endpoint compromise or data loss was found during review.
+- This incident underscores the need for ongoing monitoring of anonymization tools within the environment.
+
+## Indicators of Compromise (IoCs)
+
+- Executables: `tor-browser-windows-x86_64-portable-14.5.8.exe`, `tor.exe`, `firefox.exe` (Tor Browser folder)
+- Process Paths:  
+  - `C:\Users\CyberVM615\Desktop\Tor Browser\Browser\firefox.exe`  
+  - `C:\Users\CyberVM615\Desktop\Tor Browser\Browser\torbrowser\tor\tor.exe`
+- Network:  
+  - Outbound to IP `81.7.18.7` port `9001` (domain: umwb62.com)  
+  - Local connection on port `9150` (Tor SOCKS proxy)
+- Artifacts:  
+  - `tor-shopping-list.lnk`, `tor-shopping-list.txt` (desktop files)
+
+## Recommendations
+
+- Enforce endpoint control policies regarding anonymizing tools.
+- Consider more restrictive application whitelisting.
+- Educate users on organizational risk and policy for anonymous browsing.
+- Continue monitoring endpoint for further privacy tool usage.
+
+## Conclusion
+
+This incident validated Tor Browser installation and use for anonymized browsing on a managed endpoint. Activities were confirmed by Microsoft Defender for Endpoint logs and forensic review of process, file, and network events. No further compromise detected, though improved monitoring and policy clarification are recommended.
+
 
 ---
 
